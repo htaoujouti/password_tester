@@ -1,20 +1,25 @@
 #!/bin/bash
 if test $# -eq 0 ; then
     echo "give argument"
-else        
+else
     case $1 in
-        -t) len="$2"   
+        -t) len="$2"
             if test ${#len} -ge 8 ; then
                 echo "$len" | grep -q [[:digit:]]
                 if test $? -eq 0 ; then
                     echo "$len" | grep -q [[:alpha:]]
-                    if test $? -eq 0 ; then                        
-                        echo "Strong password"                            
+                    if test $? -eq 0 ; then 
+                        echo "$len" | grep -q "[]:/?#@\!\$&'()*+,;=%[]"
+                            if test $? -eq 0 ; then
+                                echo "Strong password"
+                            else
+                                echo "weak password include special char"
+                            fi
                     else
                         echo "weak password include char" 
                     fi
                 else
-                    echo "please include the numbers in password it is weak password"   
+                    echo "please include the numbers in password it is weak password"
                 fi
             else
                 echo "password lenght should be greater than or equal 8 hence weak password"
