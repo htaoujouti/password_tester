@@ -1,7 +1,8 @@
 #!/bin/bash
-case $1 in
-    -t ) if $# < 1; then
-    echo "enter the password"
+if $# < 1; then
+arg = "$1"
+case arg in
+    -t)   echo "enter the password"
     len="$2"
     if test $len -ge 8 ; then
         echo "$password" | grep -q [[:digit:]]
@@ -17,6 +18,11 @@ case $1 in
         fi
     else
         echo "password lenght should be greater than or equal 8 hence weak password"
-    fi ;;
-    -v ) echo "Password Tester version 2.0.1 created by Hamza Taoujouti and Mouhib Trabelsi" ;;
+    fi 
+    ;;
+    -v) echo "Password Tester version 2.0.1 created by Hamza Taoujouti and Mouhib Trabelsi" 
+    ;;
 esac
+else
+    echo "give argument"
+fi    
