@@ -1,8 +1,8 @@
-this script tests the strength of a password  passed as argument
-it tests it's length(+8 char), contains number, letters, special char
-it tests if the password is found in a dictionnaire
--t verify the password
--h show help
--g display menu and manage graphique utilisation
--v show the version number
--m display menu
+    this script tests the strength of a password  passed as argument
+    it tests it's length(+8 char), contains number, letters, special char
+    it tests if the password is found in a dictionnaire
+    -t verify the password
+    -h show help
+    -g display menu and manage graphique utilisation
+    -v show the version number
+    -m display menu
