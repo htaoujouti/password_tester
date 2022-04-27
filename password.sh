@@ -9,14 +9,14 @@ else
                 if test $? -eq 0 ; then
                     echo "$len" | grep -q [[:alpha:]]
                     if test $? -eq 0 ; then 
-                        echo "$len" | grep -q "[]:/?#@\!\$&'()*+,;=%[]"
+                        echo "$len" | grep -q "[]:/?#@\!\ \$&'()*+,;=%[]"
                             if test $? -eq 0 ; then
                                 input="./milw0rm-dictionary.txt"
                                 while IFS= read -r line
                                 do
-                                    if test "$len"=="$line" ; then
+                                    if [[ "$len" == "$line" ]] ; then
                                         echo "password easy to guess change it"
-                                        break
+                                        exit
                                     fi
                                 done < "$input"
                                 echo "Strong password"
