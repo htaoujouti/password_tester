@@ -11,6 +11,13 @@ else
                     if test $? -eq 0 ; then 
                         echo "$len" | grep -q "[]:/?#@\!\$&'()*+,;=%[]"
                             if test $? -eq 0 ; then
+                                input="./milw0rm-dictionary.txt"
+                                while IFS= read -r line
+                                do
+                                    if "$len" == "$line" ; then
+                                        echo "password easy to guess change it"
+                                    fi
+                                done < "$input"
                                 echo "Strong password"
                             else
                                 echo "weak password include special char"
