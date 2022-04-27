@@ -1,2 +1,2 @@
 # password_tester
-.\password.sh
+./password.sh

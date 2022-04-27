@@ -14,8 +14,9 @@ else
                                 input="./milw0rm-dictionary.txt"
                                 while IFS= read -r line
                                 do
-                                    if "$len" == "$line" ; then
+                                    if test "$len"=="$line" ; then
                                         echo "password easy to guess change it"
+                                        break
                                     fi
                                 done < "$input"
                                 echo "Strong password"
