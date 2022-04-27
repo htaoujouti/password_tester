@@ -1,6 +1,9 @@
 #!/bin/bash
+show_usage () {
+   echo "password.sh: [-h] [-v] [-m] [-g] [-N] [-t] password_to_test"
+}
 if test $# -eq 0 ; then
-    echo "give argument"
+    show_usage
 else
     case $1 in
         -t) len="$2"
@@ -40,5 +43,7 @@ else
             do
                 echo "$line"
             done < "$input"
+        ;;    
+        -m)
     esac
 fi
