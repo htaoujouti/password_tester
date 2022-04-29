@@ -2,11 +2,17 @@
 show_usage () {
    echo "password.sh: [-h] [-v] [-m] [-g] [-N] [-t] password_to_test"
 }
-if test $# -eq 0 ; then
-    show_usage
-else
-    case $1 in
-        -t) len="$2"
+helps (){
+    input="./help.txt"
+            while IFS= read -r line
+            do
+                echo "$line"
+            done < "$input"
+}
+
+test_password(){
+    len=$1
+
             if test ${#len} -ge 8 ; then
                 echo "$len" | grep -q [[:digit:]]
                 if test $? -eq 0 ; then
@@ -35,15 +41,23 @@ else
             else
                 echo "password lenght should be greater than or equal 8 hence weak password"
             fi 
+}
+
+fn_version(){
+    echo "Password Tester version 2.0.1 created by Hamza Taoujouti and Mouhib Trabelsi"
+}
+while getopts ":hvt:m:g:" option;
+do
+  case $option in
+        t) test_password $OPTARG
         ;;
-        -v) echo "Password Tester version 2.0.1 created by Hamza Taoujouti and Mouhib Trabelsi" 
+        v)  fn_version
         ;;
-        -h) input="./help.txt"
-            while IFS= read -r line
-            do
-                echo "$line"
-            done < "$input"
-        ;;    
-        -m)
+        h) helps
+        ;; 
+        :) echo "Option -$OPTARG needs an argument"
+        ;;
+        *) show_usage
+        ;;
     esac
-fi
+done
