@@ -4,43 +4,42 @@ show_usage () {
 }
 helps (){
     input="./help.txt"
-            while IFS= read -r line
-            do
-                echo "$line"
-            done < "$input"
+        while IFS= read -r line
+        do
+            echo "$line"
+        done < "$input"
 }
 
 test_password(){
     len=$1
-
-            if test ${#len} -ge 8 ; then
-                echo "$len" | grep -q [[:digit:]]
+    if test ${#len} -ge 8 ; then
+        echo "$len" | grep -q [[:digit:]]
+        if test $? -eq 0 ; then
+            echo "$len" | grep -q [[:alpha:]]
+            if test $? -eq 0 ; then 
+                echo "$len" | grep -q "[]:/?#@\!\ \$&'()*+,;=%[]"
                 if test $? -eq 0 ; then
-                    echo "$len" | grep -q [[:alpha:]]
-                    if test $? -eq 0 ; then 
-                        echo "$len" | grep -q "[]:/?#@\!\ \$&'()*+,;=%[]"
-                            if test $? -eq 0 ; then
-                                input="./milw0rm-dictionary.txt"
-                                while IFS= read -r line
-                                do
-                                    if [[ "$len" == "$line" ]] ; then
-                                        echo "password easy to guess change it"
-                                        exit
-                                    fi
-                                done < "$input"
-                                echo "Strong password"
-                            else
-                                echo "weak password include special char"
-                            fi
-                    else
-                        echo "weak password include char" 
+                    input="./milw0rm-dictionary.txt"
+                    while IFS= read -r line
+                    do
+                    if [[ "$len" == "$line" ]] ; then
+                        echo "password easy to guess change it"
+                        exit
                     fi
+                    done < "$input"
+                    echo "Strong password"
                 else
-                    echo "please include the numbers in password it is weak password"
+                    echo "weak password include special char"
                 fi
             else
-                echo "password lenght should be greater than or equal 8 hence weak password"
-            fi 
+                echo "weak password include char" 
+            fi
+        else
+            echo "please include the numbers in password it is weak password"
+        fi
+    else
+        echo "password lenght should be greater than or equal 8 hence weak password"
+    fi 
 }
 
 fn_version(){
@@ -48,7 +47,7 @@ fn_version(){
 }
 while getopts ":hvt:m:g:" option;
 do
-  case $option in
+    case $option in
         t) test_password $OPTARG
         ;;
         v)  fn_version
