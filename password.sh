@@ -45,13 +45,31 @@ test_password(){
 fn_version(){
     echo "Password Tester version 2.0.1 created by Hamza Taoujouti and Mouhib Trabelsi"
 }
+graphique(){
+retour=$(yad --form --field="Option list":CB "help\!version\!verfication password")
+case $retour in
+
+        "verfication password|") 
+         pwd=$(yad --form --field="Password":CE)
+         test_password $pwd        
+         
+        ;;
+        "version|")  fn_version
+        ;;
+        "help|") helps
+        ;;
+        *) show_usage
+        ;;
+    esac 
+
+}
 
 show_menu(){
 
     echo "  
             1 : vérification du mot de passe introduit
             2 : Pour afficher le help détaillé à partir d'un fichier texte
-            3 : Pour afficher un menu textuel et gérer les fonctionnalité de façon graphique(Utilisation de YAD).
+            3 : Pour afficher un menu textuel et gérer les fonctionnalité de façon graphique.
             4 : Pour afficher le nom des auteurs et version du code.
             select an option."
             read opt
@@ -71,7 +89,7 @@ show_menu(){
         ;;
     esac 
 }
-while getopts ":hvt:mg:" option;
+while getopts ":hvt:mg" option;
 do
     case $option in
         t) test_password $OPTARG
@@ -81,6 +99,8 @@ do
         h) helps
         ;; 
         m) show_menu
+        ;;
+        g) graphique
         ;;
         :) echo "Option -$OPTARG needs an argument"
         ;;
