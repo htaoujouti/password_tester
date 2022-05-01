@@ -47,14 +47,17 @@ fn_version(){
 }
 
 show_menu(){
-    echo "  1 : vérification du mot de passe introduit
+    echo "  
+            1 : vérification du mot de passe introduit
             2 : Pour afficher le help détaillé à partir d'un fichier texte
             3 : Pour afficher un menu textuel et gérer les fonctionnalité de façon graphique(Utilisation de YAD).
             4 : Pour afficher le nom des auteurs et version du code.
             select an option."
             read opt
             case $opt in
-        1) test_password $OPTARG
+        1)  echo "donner le password"
+            read pass
+            test_password $pass
         ;;
         4)  fn_version
         ;;
