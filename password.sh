@@ -47,6 +47,7 @@ fn_version(){
 }
 
 show_menu(){
+
     echo "  
             1 : vérification du mot de passe introduit
             2 : Pour afficher le help détaillé à partir d'un fichier texte
@@ -55,6 +56,7 @@ show_menu(){
             select an option."
             read opt
             case $opt in
+
         1)  echo "donner le password"
             read pass
             test_password $pass
